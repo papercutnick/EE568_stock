@@ -11,7 +11,7 @@ public class DBAccess {
 		Connection conn=null;
 		try {
 			Class.forName( "org.postgresql.Driver" ).newInstance();
-			String url = "jdbc:postgresql://localhost:5432/teststock" ;
+			String url = "jdbc:postgresql://54.148.123.99:5432/ece568" ;
 			conn=DriverManager.getConnection(url, "postgres" , "postgres" );
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

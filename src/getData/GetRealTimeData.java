@@ -30,16 +30,18 @@ public class GetRealTimeData extends Thread{
 				String d = st.getDate();
 				String t = st.getTime();
 				String fmtDate = sdf2.format(date.getTime());
-				//DBAccess.insertRealtimeData(code, time, price, volume);
+//				DBAccess.insertRealtimeData(code, time, price, volume,fmtDate);
 				
 				//----------------------------------
 				System.out.println("Date:"+d+" "+fmtDate+" System time:"+time+" Returned time:"+t+" stock code:"+code+" price:"+price+" volume:"+volume);
 				int hour=0;
-				if(t.endsWith("pm")){
+				if(t.endsWith("pm") && !t.startsWith("12")){
 					hour=Integer.valueOf(t.substring(0, t.indexOf(":")))+12;
 				}else{
 					hour=Integer.valueOf(t.substring(0, t.indexOf(":")));
 				}
+				//System.out.println(hour);
+				
 				if(hour<16){
 					int result=DBAccess.insertRealtimeData(code, time, price, volume, fmtDate);
 					if(result!=0)
