@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class GetHistoryData extends Thread{
+	// Integration of retrieving data and storing to database. Only for using at the first stage normally.
 	// history: code, date, open, high, low, close, volume.
 	private String[] stockCodes;
 	
