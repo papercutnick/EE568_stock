@@ -109,6 +109,28 @@ public class DBAccess {
        return result;
 	}
 	
+	public static int deleteFromHistory(String stockCode, String from, String to){
+		Connection conn = getConnection();
+		PreparedStatement ps=null;
+		String sql = "delete from history_price where stockcode=? and date>? and date<?";
+		int result=0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, stockCode);
+			ps.setString(2, from);
+			ps.setString(3, to);
+			result=ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result=0;
+		}  finally{
+			closeStatement(ps);
+			closeConnection(conn);
+		}
+       return result;
+	}
+	
 	public static void closeConnection(Connection conn) {
 	    try {
 	        if(conn!=null){
