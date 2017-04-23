@@ -21,6 +21,56 @@ public class DBAccess {
         return conn;
 	}
 	
+	public static String getLatestPrice(String code){
+		Connection conn = getConnection();
+		PreparedStatement ps=null;
+		String sql = "select stockcode, time, date, price from realtime_price where time=(select max(time) from (select time from realtime_price where date=(select max(date) from realtime_price where stockcode=?)) as temp) and stockcode=?";
+		ResultSet rs=null;
+		String cnt="";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, code);
+			ps.setString(2, code);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				cnt = rs.getString("price");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  finally{
+			closeResultSet(rs);
+			closeStatement(ps);
+			closeConnection(conn);
+		}
+       return cnt;
+	}
+	
+	public static String getHighestPriceInNDays(String code, int t){
+		Connection conn = getConnection();
+		PreparedStatement ps=null;
+		String sql = "SELECT MAX(temp.high) FROM(SELECT *  FROM history_price WHERE stockcode=? ORDER BY date DESC FETCH FIRST ? ROWS ONLY) as temp".toLowerCase();
+		ResultSet rs=null;
+		String cnt="";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, code);
+			ps.setInt(2, t);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				cnt = rs.getString("high");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  finally{
+			closeResultSet(rs);
+			closeStatement(ps);
+			closeConnection(conn);
+		}
+       return cnt;
+	}
+	
 	public static int insertRealtimeData(String stockCode, String time, double price, int volume, String date){
 		Connection conn = getConnection();
 		PreparedStatement ps=null;

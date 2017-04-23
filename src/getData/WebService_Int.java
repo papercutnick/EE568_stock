@@ -1,13 +1,19 @@
 package getData;
 
+import Database.DBAccess;
+
 public class WebService_Int implements WebService_Imp{
-	public String retrieveRealtime(String code) throws java.rmi.RemoteException{
-		return Utils.retrieveRealtime(code);
+	public String getLatestPrice(String code) throws java.rmi.RemoteException{
+		return DBAccess.getLatestPrice(code);
+	}
+	
+	public String getHighestPriceInNDays(String code, int t) throws java.rmi.RemoteException{
+		return DBAccess.getHighestPriceInNDays(code, t);
 	}
 
 	public String retrieveHistory(String code) throws java.rmi.RemoteException{
 		// ? about parameters format and return type
-		return Utils.retrieveHistory(code);
+		return Utils.retrieveHistory(code, code, code, code, code, code, code);
 		
 	}
 

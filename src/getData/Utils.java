@@ -35,6 +35,8 @@ public class Utils {
 
 	public static String retrieveHistory(String code, String from_year, String from_month, String from_day, String to_year, String to_month, String to_day){
 		// Input and output type all String. Can be changed.
+		return "";
+		/*
 		try{
 			HashMap<String, String> map= new HashMap<String, String>();map.put("01","00");map.put("02","01");map.put("03","02");map.put("04","03");map.put("05","04");map.put("06","05");map.put("07","06");map.put("08","07");map.put("09","08");map.put("10","09");map.put("11","10");map.put("12","11");
 			URL url = new URL("http://ichart.finance.yahoo.com/table.csv?s="+code+"&a="+map.get(from_month)+"&b="+from_day+"&c="+from_year+"&d="+map.get(to_month)+"&e="+to_day+"&f="+to_year+"&g=d&ignore=.csv");
@@ -70,7 +72,7 @@ public class Utils {
 			e.printStackTrace();
 			return;
 		}
-		
+		*/
 	}
 
 	public static String predictNext(String code){
