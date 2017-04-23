@@ -42,8 +42,8 @@ public class Controller {
 	 * Used for the first phase presentation (Data Collector Module).
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		GetRealTimeData rl = new GetRealTimeData("YHOO,BIDU,GOOG,MSFT,ORCL");
-		GetHistoryData  hd = new GetHistoryData("YHOO,BIDU,GOOG,MSFT,ORCL");
+		GetRealTimeData rl = new GetRealTimeData("YHOO,BIDU,GOOG,MSFT,ORCL,COST,FB,AMZN,TSLA,CSCO");
+		GetHistoryData  hd = new GetHistoryData("YHOO,BIDU,GOOG,MSFT,ORCL,COST,FB,AMZN,TSLA,CSCO");
 		
 		ScheduledExecutorService service = Executors.newScheduledThreadPool(2);
 		//start getting real time data thread

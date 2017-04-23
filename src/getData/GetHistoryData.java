@@ -53,24 +53,25 @@ public class GetHistoryData extends Thread{
 					br.readLine(); 
 					String line = br.readLine(); //read twice readline() because the first line is the titles.
 					//Only split on commas that aren't in quotes
-					String[] stockinfo = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-					String code = stk;
-					String date = stockinfo[0];
-					double open = Double.parseDouble(stockinfo[1]);
-					double high = Double.parseDouble(stockinfo[2]);
-					double low = Double.parseDouble(stockinfo[3]);
-					double close = Double.parseDouble(stockinfo[4]);
-					int volume = Integer.parseInt(stockinfo[5]);
-					
-					System.out.println("History Data Date:"+date+" stock code:"+code+" open:"+open+" high:"+high+" low:"+low+" close:"+close+" volume:"+volume);
-					
-					int result=DBAccess.insertHistoryData(code, date, open, high, low, close, volume);
-					if(result!=0)
-						System.out.println("Insert history data complete.");
-					else
-						System.out.println("Insert  history data failed.");
-					
-				} catch(IOException e){
+					if(line != null){
+						String[] stockinfo = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+						String code = stk;
+						String date = stockinfo[0];
+						double open = Double.parseDouble(stockinfo[1]);
+						double high = Double.parseDouble(stockinfo[2]);
+						double low = Double.parseDouble(stockinfo[3]);
+						double close = Double.parseDouble(stockinfo[4]);
+						int volume = Integer.parseInt(stockinfo[5]);
+						
+						System.out.println("History Data Date:"+date+" stock code:"+code+" open:"+open+" high:"+high+" low:"+low+" close:"+close+" volume:"+volume);
+						
+						int result=DBAccess.insertHistoryData(code, date, open, high, low, close, volume);
+						if(result!=0)
+							System.out.println("Insert history data complete.");
+						else
+							System.out.println("Insert  history data failed.");
+					}
+				} catch(Exception e){
 					e.printStackTrace();
 					return;
 				}
