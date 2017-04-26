@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class GetHistoryData extends Thread{
+	// Integration of retrieving data and storing to database. Only for using at the first stage normally.
 	// history: code, date, open, high, low, close, volume.
 	private String[] stockCodes;
 	
@@ -40,14 +41,14 @@ public class GetHistoryData extends Thread{
 	        HashMap<String, String> map= new HashMap<String, String>();map.put("01","00");map.put("02","01");map.put("03","02");map.put("04","03");map.put("05","04");map.put("06","05");map.put("07","06");map.put("08","07");map.put("09","08");map.put("10","09");map.put("11","10");map.put("12","11");
 			
 	        existed = DBAccess.checkExsistence(stk, year+"-"+month+"-"+day);
-	        
 			if(!existed){
 				try{
-					URL url = new URL("http://ichart.finance.yahoo.com/table.csv?s="+stk+"&a="+map.get(month)+"&b="+day+"&c="+year+"&d="+map.get(month)+"&e="+day+"&f="+year+"&g=d&ignore=.csv");
+					String temp = "http://ichart.finance.yahoo.com/table.csv?s="+stk+"&a="+map.get(month)+"&b="+day+"&c="+year+"&d="+map.get(month)+"&e="+day+"&f="+year+"&g=d&ignore=.csv";
+			        URL url = new URL(temp);
 					URLConnection connection = url.openConnection(); 
 					InputStreamReader is = new InputStreamReader(connection.getInputStream());
 					BufferedReader br = new BufferedReader(is);
-					
+
 					// Parse CSV Into Array
 					br.readLine(); 
 					String line = br.readLine(); //read twice readline() because the first line is the titles.
@@ -69,7 +70,8 @@ public class GetHistoryData extends Thread{
 					else
 						System.out.println("Insert  history data failed.");
 					
-				} catch(IOException e){
+					
+				} catch(Exception e){
 					e.printStackTrace();
 					return;
 				}
