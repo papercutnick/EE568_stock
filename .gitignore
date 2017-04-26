@@ -1,1 +1,9 @@
 /bin/
+<<<<<<< HEAD
+=======
+.settings/org.eclipse.jdt.core.prefs
+src/Database/DBAccess.java
+src/getData/Controller.java
+src/getData/WebService_Imp.java
+src/getData/WebService_Int.java
+>>>>>>> origin/master
