@@ -7,6 +7,8 @@ import yahoo.StockFetcher;
 import Database.DBAccess;
 
 public class GetRealTimeData extends Thread{
+	// Integration of retrieving data and storing to database. Only for using at the first stage normally.
+	
 	private String stockCodes;
 	
 	public GetRealTimeData(String stockCodes){
